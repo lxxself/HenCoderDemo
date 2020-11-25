@@ -24,8 +24,8 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -37,7 +37,6 @@ import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
 import java.util.List;
 
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 
 /**
@@ -133,7 +132,7 @@ public class StickyLayoutHelper extends FixAreaLayoutHelper {
 
 
         // do layout
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
         final OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
         result.mConsumed = orientationHelper.getDecoratedMeasurement(view);
 
@@ -144,7 +143,7 @@ public class StickyLayoutHelper extends FixAreaLayoutHelper {
         final int remainingSpace = layoutState.getAvailable() - result.mConsumed + layoutState.getExtra();
 
         int left, top, right, bottom;
-        if (helper.getOrientation() == VERTICAL) {
+        if (helper.getOrientation() == RecyclerView.VERTICAL) {
             // not support RTL now
             if (helper.isDoLayoutRTL()) {
                 right = helper.getContentWidth() - helper.getPaddingRight() - mMarginRight;
@@ -378,7 +377,7 @@ public class StickyLayoutHelper extends FixAreaLayoutHelper {
         // 1. normal flow to abnormal flow; 2. abnormal flow to normal flow
         if ((mStickyStart && endPosition >= mPos) || (!mStickyStart && startPosition <= mPos)) {
             int consumed = orientationHelper.getDecoratedMeasurement(mFixView);
-            boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+            boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
             int extraTopOffset = getExtraTopOffset(helper);
             final int startAdjust = layoutInVertical ? mAdjuster.top + extraTopOffset : mAdjuster.left;
             final int endAdjust = layoutInVertical ? mAdjuster.bottom : mAdjuster.right;
@@ -529,7 +528,7 @@ public class StickyLayoutHelper extends FixAreaLayoutHelper {
         }
 
         boolean normalHandle = false;
-        boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
         int extraTopOffset = getExtraTopOffset(helper);
         final int startAdjust = layoutInVertical ? mAdjuster.top + extraTopOffset : mAdjuster.left;
         final int endAdjust = layoutInVertical ? mAdjuster.bottom : mAdjuster.right;
@@ -726,7 +725,7 @@ public class StickyLayoutHelper extends FixAreaLayoutHelper {
 
     private void doMeasure(View view, LayoutManagerHelper helper) {
         final VirtualLayoutManager.LayoutParams params = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         int widthSize = helper.getContentWidth() - helper.getPaddingLeft() - helper.getPaddingRight() - getHorizontalMargin();
         int heightSize = helper.getContentHeight() - helper.getPaddingTop() - helper.getPaddingBottom() - getVerticalMargin();

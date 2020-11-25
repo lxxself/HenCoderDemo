@@ -14,8 +14,9 @@ import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,10 @@ public class DebugActivity extends Activity {
         setContentView(R.layout.main_activity);
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.main_view);
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(this);
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
         List<Adapter> adapterList = new ArrayList<>();
         adapterList.add(new SubAdapter(new LinearLayoutHelper(20), 20));
-        adapterList.add(new SubAdapter(new StickyLayoutHelper(true), 1));
+//        adapterList.add(new SubAdapter(new StickyLayoutHelper(true), 1));
         adapterList.add(new SubAdapter(new LinearLayoutHelper(20), 20));
         adapterList.add(new SubAdapter(new GridLayoutHelper(4), 80));
         // adapterList.add(new SubAdapter(new FixLayoutHelper(0, 0), 1));
@@ -88,7 +89,6 @@ public class DebugActivity extends Activity {
         public int getItemCount() {
             return mItemCount;
         }
-
     }
 
     private static class SubViewHolder extends RecyclerView.ViewHolder {

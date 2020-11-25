@@ -26,25 +26,45 @@
 
 buildscript {
     repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-        mavenCentral()
         jcenter()
+        google()
+        mavenCentral()
+        maven {
+            url "http://nexus.ops.yangege.cn/repository/maven-releases/"
+            credentials {
+                username = 'android-gradle'
+                password = 'DD6-nM7wG8YsROGB7qFi'
+            }
+            metadataSources {
+                mavenPom()
+                artifact()
+            }
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
-        classpath 'com.github.xfumihiro.view-inspector:view-inspector-plugin:0.1.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.android.tools.build:gradle:4.0.1'
+//        classpath 'com.github.xfumihiro.view-inspector:view-inspector-plugin:0.1.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.gejia.plugin:upaar:1.0.8'
     }
 }
 
 allprojects {
     repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
         jcenter()
+        google()
         mavenLocal()
+        maven {
+            url "http://nexus.ops.yangege.cn/repository/maven-releases/"
+            credentials {
+                username = 'android-gradle'
+                password = 'DD6-nM7wG8YsROGB7qFi'
+            }
+            metadataSources {
+                mavenPom()
+                artifact()
+            }
+        }
     }
 }

@@ -39,14 +39,16 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutParams;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutParams;
+
 import android.util.Log;
 import android.view.View;
 
-import static android.support.v7.widget.LinearLayoutManager.INVALID_OFFSET;
+import static androidx.recyclerview.widget.LinearLayoutManager.INVALID_OFFSET;
 import static com.alibaba.android.vlayout.VirtualLayoutManager.HORIZONTAL;
 import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_END;
 import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_START;
@@ -641,10 +643,10 @@ public class StaggeredGridLayoutHelper extends BaseLayoutHelper {
     private boolean checkSpanForGap(Span span, VirtualLayoutManager layoutManager, int line) {
         OrientationHelperEx orientationHelper = layoutManager.getMainOrientationHelper();
         if (layoutManager.getReverseLayout()) {
-            if (span.getEndLine(orientationHelper) < line) {
+            if (span.getEndLine(orientationHelper) != line) {
                 return true;
             }
-        } else if (span.getStartLine(orientationHelper) > line) {
+        } else if (span.getStartLine(orientationHelper) != line) {
             return true;
         }
         return false;
@@ -713,7 +715,7 @@ public class StaggeredGridLayoutHelper extends BaseLayoutHelper {
 
     private Span findSpan(int position, View child, boolean isStart) {
         int span = mLazySpanLookup.getSpan(position);
-        if (mSpans == null){
+        if (mSpans == null) {
             return null;
         }
         if (span >= 0 && span < mSpans.length) {

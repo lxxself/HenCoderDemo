@@ -30,9 +30,8 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
@@ -40,7 +39,6 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 
 /**
@@ -228,7 +226,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
 
         OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
 
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         if (layoutInVertical) {
             mTotalSize = helper.getContentWidth() - helper.getPaddingRight() - helper.getPaddingLeft() - getHorizontalMargin() - getHorizontalPadding();
@@ -429,7 +427,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
             }
             final VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
 
-            if (helper.getOrientation() == VERTICAL) {
+            if (helper.getOrientation() == RecyclerView.VERTICAL) {
                 helper.measureChildWithMargins(view, spec, getMainDirSpec(lp.height, mTotalSize,
                     View.MeasureSpec.getSize(spec), lp.mAspectRatio));
             } else {
@@ -463,7 +461,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
                         View.MeasureSpec.EXACTLY);
                 }
 
-                if (helper.getOrientation() == VERTICAL) {
+                if (helper.getOrientation() == RecyclerView.VERTICAL) {
                     helper.measureChildWithMargins(view, spec, maxMeasureSpec);
                 } else {
                     helper.measureChildWithMargins(view, maxMeasureSpec, spec);
@@ -568,7 +566,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
 
     @Override
     public int computeAlignOffset(int offset, boolean isLayoutEnd, boolean useAnchor, LayoutManagerHelper helper) {
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         if (isLayoutEnd) {
             if (offset == getItemCount() - 1) {
@@ -652,7 +650,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
                 return;
             }
 
-            boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+            boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
             if (anchorInfo.layoutFromEnd) {
                 anchorInfo.coordinate += layoutInVertical ? mVGap : mHGap;
             } else {
@@ -704,7 +702,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
             diff = -1;
         }
 
-        if (helper.getOrientation() == VERTICAL && helper.isDoLayoutRTL()) { // start from last span
+        if (helper.getOrientation() == RecyclerView.VERTICAL && helper.isDoLayoutRTL()) { // start from last span
             span = consumedSpanCount - 1;
             spanDiff = -1;
         } else {

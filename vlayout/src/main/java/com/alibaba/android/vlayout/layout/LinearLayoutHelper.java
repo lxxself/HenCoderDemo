@@ -30,12 +30,10 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.AnchorInfoWrapper;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.State;
 import android.util.Log;
 import android.view.View;
 
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -96,7 +94,7 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
         final boolean isOverLapMargin = helper.isEnableMarginOverLap();
 
         VirtualLayoutManager.LayoutParams params = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         int startSpace = 0, endSpace = 0, gap = 0;
         boolean isLayoutEnd = layoutState.getLayoutDirection() == VirtualLayoutManager.LayoutStateWrapper.LAYOUT_END;
@@ -169,7 +167,7 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
         OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
         result.mConsumed = orientationHelper.getDecoratedMeasurement(view) + startSpace + endSpace + gap;
         int left, top, right, bottom;
-        if (helper.getOrientation() == VERTICAL) {
+        if (helper.getOrientation() == RecyclerView.VERTICAL) {
             // not support RTL now
             if (helper.isDoLayoutRTL()) {
                 right = helper.getContentWidth() - helper.getPaddingRight() - mMarginRight - mPaddingRight;
@@ -218,14 +216,14 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
     }
 
     @Override
-    public void checkAnchorInfo(State state, AnchorInfoWrapper anchorInfo, LayoutManagerHelper helper) {
+    public void checkAnchorInfo(RecyclerView.State state, AnchorInfoWrapper anchorInfo, LayoutManagerHelper helper) {
         super.checkAnchorInfo(state, anchorInfo, helper);
         mLayoutWithAnchor = true;
     }
 
     @Override
     public int computeAlignOffset(int offset, boolean isLayoutEnd, boolean useAnchor, LayoutManagerHelper helper) {
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         if (isLayoutEnd) {
             if (offset == getItemCount() - 1) {

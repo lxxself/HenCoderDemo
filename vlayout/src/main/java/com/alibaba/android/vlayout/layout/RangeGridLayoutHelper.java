@@ -24,11 +24,10 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Recycler;
-import android.support.v7.widget.RecyclerView.State;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Recycler;
+import androidx.recyclerview.widget.RecyclerView.State;
 import android.util.Log;
 import android.view.View;
 
@@ -45,7 +44,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 /**
  * LayoutHelper provides RangeGridLayoutHelper. The difference with {@link GridLayoutHelper} is that this layoutHelper could has child group logically but implemented as flat.
@@ -238,7 +236,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
 
         OrientationHelperEx orientationHelper = helper.getMainOrientationHelper();
 
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
 
         if (layoutInVertical) {
             mTotalSize = helper.getContentWidth() - helper.getPaddingRight() - helper.getPaddingLeft() - rangeStyle
@@ -464,7 +462,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
                     View.MeasureSpec.EXACTLY);
             }
             final LayoutParams lp = (LayoutParams) view.getLayoutParams();
-            if (helper.getOrientation() == VERTICAL) {
+            if (helper.getOrientation() == RecyclerView.VERTICAL) {
                 helper.measureChildWithMargins(view, spec, getMainDirSpec(rangeStyle, lp.height, mTotalSize,
                     View.MeasureSpec.getSize(spec), lp.mAspectRatio));
             } else {
@@ -498,7 +496,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
                         View.MeasureSpec.EXACTLY);
                 }
 
-                if (helper.getOrientation() == VERTICAL) {
+                if (helper.getOrientation() == RecyclerView.VERTICAL) {
                     helper.measureChildWithMargins(view, spec, maxMeasureSpec);
                 } else {
                     helper.measureChildWithMargins(view, maxMeasureSpec, spec);
@@ -707,7 +705,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
     
     @Override
     public int computeAlignOffset(int offset, boolean isLayoutEnd, boolean useAnchor, LayoutManagerHelper helper) {
-        final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+        final boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
         if (isLayoutEnd) {
             if (offset == getItemCount() - 1) {
                 return GridRangeStyle.computeEndAlignOffset(mRangeStyle, layoutInVertical);
@@ -775,7 +773,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
                 return;
             }
 
-            boolean layoutInVertical = helper.getOrientation() == VERTICAL;
+            boolean layoutInVertical = helper.getOrientation() == RecyclerView.VERTICAL;
             if (anchorInfo.layoutFromEnd) {
                 anchorInfo.coordinate += layoutInVertical ? mVGap : mHGap;
             } else {
@@ -827,7 +825,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
             diff = -1;
         }
 
-        if (helper.getOrientation() == VERTICAL && helper.isDoLayoutRTL()) { // start from last span
+        if (helper.getOrientation() == RecyclerView.VERTICAL && helper.isDoLayoutRTL()) { // start from last span
             span = consumedSpanCount - 1;
             spanDiff = -1;
         } else {
@@ -850,7 +848,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
     public int getBorderStartSpace(LayoutManagerHelper helper) {
         int start = getRange().getLower().intValue();
         RangeStyle rangeStyle = mRangeStyle.findRangeStyleByPosition(start);
-        if (helper.getOrientation() == VERTICAL) {
+        if (helper.getOrientation() == RecyclerView.VERTICAL) {
             return rangeStyle.getFamilyMarginTop() + rangeStyle.getFamilyPaddingTop();
         } else {
             return rangeStyle.getFamilyMarginLeft() + rangeStyle.getFamilyPaddingLeft();
@@ -860,7 +858,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
     public int getBorderEndSpace(LayoutManagerHelper helper) {
         int end = getRange().getUpper().intValue();
         RangeStyle rangeStyle = mRangeStyle.findRangeStyleByPosition(end);
-        if (helper.getOrientation() == VERTICAL) {
+        if (helper.getOrientation() == RecyclerView.VERTICAL) {
             return rangeStyle.getFamilyMarginBottom() + rangeStyle.getFamilyPaddingBottom();
         } else {
             return rangeStyle.getFamilyMarginRight() + rangeStyle.getFamilyPaddingRight();
